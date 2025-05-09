@@ -5,11 +5,13 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { DepartamentosComponent } from './departamentos/departamentos.component';
+import { authGuard } from '../custom/auth.guard';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: PagesComponent,
+    canActivate: [authGuard],
     children: [
       { path: '', component: ProductosComponent, data: { titulo: 'Productos' } },
       { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
