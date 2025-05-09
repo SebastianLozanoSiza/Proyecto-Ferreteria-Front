@@ -1,1 +1,119 @@
-<p>departamentos works!</p>
+<!-- departments.component.html -->
+<section class="departments-section">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">
+                        <i class="fas fa-map-marked-alt"></i> Departamentos
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container-fluid">
+            <!-- Barra de búsqueda y botón crear -->
+            <div class="row mb-4 justify-content-center">
+                <div class="col-md-3 text-center">
+                    <div class="input-group search-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar departamento..."
+                            formControlName="searchTerm">
+                        <div class="input-group-append">
+                            <button class="input-group-text search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-end">
+                    <button class="btn btn-create">
+                        <i class="fas fa-plus-circle me-2"></i>Crear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenedor de la tabla -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Selector de registros por página -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="entries-selector">
+                                <span>Mostrar </span>
+                                <select class="form-select entries-select">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                                <span> registros por página</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de departamentos -->
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="w-75">Departamento</th>
+                                    <th scope="col" class="text-center w-25">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let departamento of listaDepartamentos">
+                                    <td>{{ departamento.nombre }}</td>
+                                    <td class="text-center">
+                                        <div class="action-buttons">
+                                            <button class="btn btn-edit" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-delete" title="Eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">No se encontraron departamentos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Información de registros -->
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="records-info">
+                                Mostrando registros del {{ 1 }} al {{ 5 }} de un total de {{ 10 }}
+                            </div>
+                        </div>
+
+                        <!-- Paginación -->
+                        <div class="col-md-6">
+                            <nav aria-label="Navegación de páginas">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">
+                                            <i class="fas fa-chevron-left"></i> Anterior
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">{{ 1 }}</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">
+                                            Siguiente <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

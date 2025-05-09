@@ -1,15 +1,11 @@
-<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <!-- Brand Logo -->
   <a href="../../index3.html" class="brand-link">
     <img src="https://skillicons.dev/icons?i=angular" alt="AdminLTE Logo" class="brand-image elevation-3"
       style="opacity: .8">
     <span class="brand-text font-weight-light">AdminLTE 3</span>
   </a>
 
-  <!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img src="./assets/dist/img/user.png" class="img-circle elevation-2" alt="User Image">
@@ -19,40 +15,19 @@
       </div>
     </div>
 
-    <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Menús con submenús -->
         <ng-container *ngFor="let item of menuItems">
-          <li class="nav-item has-treeview" *ngIf="item.submenu && item.submenu.length > 0">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview">
+            <a [routerLink]="item.routerLink" class="nav-link">
               <i class="{{item.icono}} nav-icon"></i>
               <p class="sidebar-title">
                 <strong>{{item.titulo}}</strong>
-                <span class="badge badge-primary ml-2">{{item.submenu.length}}</span>
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li *ngFor="let subMenuItem of item.submenu" class="nav-item">
-                <a [routerLink]="subMenuItem.routerLink" class="nav-link">
-                  <i class="{{subMenuItem.icon}} nav-icon"></i>
-                  <p>{{subMenuItem.titulo}}</p>
-                </a>
-              </li>
-            </ul>
           </li>
         </ng-container>
-        <!-- Menús independientes -->
-        <ng-container *ngFor="let item of menuItems">
-          <li class="nav-item" *ngIf="!item.submenu || item.submenu.length === 0">
-            <a [routerLink]="item.routerLink" class="nav-link">
-              <i class="{{item.icono}} nav-icon"></i>
-              <p>{{item.titulo}}</p>
-            </a>
-          </li>
-        </ng-container>
-        <!-- Logout -->
+
         <li class="nav-item" style="position: fixed; bottom: 0;">
           <a (click)="logout()" class="nav-link" style="cursor: pointer;">
             <i class="fas fa-sign-out-alt nav-icon"></i>
@@ -61,7 +36,5 @@
         </li>
       </ul>
     </nav>
-    <!-- /.sidebar-menu -->
   </div>
-  <!-- /.sidebar -->
 </aside>

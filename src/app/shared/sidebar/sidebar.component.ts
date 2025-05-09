@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,17 +8,16 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
-  public menuItems: any[] = [{
-    titulo: 'Dashboard',
-    icono: 'nav-icon fas fa-tachometer-alt',
-    submenu: [
-      { titulo: 'Clientes', icon: 'far fa-circle', routerLink: '/dashboard/clientes' },
-      { titulo: 'Empleados', icon: 'far fa-circle', routerLink: '/dashboard/empleados' },
-      { titulo: 'Departamentos', icon: 'far fa-circle', routerLink: '/dashboard/departamentos' }
-    ]
-  }];
+  private router = inject(Router);
+
+  public menuItems: any[] = [
+    { titulo: 'Clientes', icono: 'fas fa-users', routerLink: '/dashboard/clientes' },
+    { titulo: 'Empleados', icono: 'fas fa-user-tie', routerLink: '/dashboard/empleados' },
+    { titulo: 'Departamentos', icono: 'fas fa-map-marked-alt', routerLink: '/dashboard/departamentos' }
+  ];
 
   logout() {
-    location.href = 'login';
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
 }

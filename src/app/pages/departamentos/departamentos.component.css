@@ -1,0 +1,218 @@
+/* departments.component.scss */
+.departments-section {
+    padding: 20px 0;
+}
+
+.section-title {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    position: relative;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.section-title i {
+    color: #ff6b00;
+    margin-right: 10px;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100px;
+    height: 3px;
+    background: #ff6b00;
+}
+
+.search-group {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-group .form-control {
+    height: 48px;
+    border: none;
+    padding-left: 15px;
+    font-size: 15px;
+}
+
+.search-group .form-control:focus {
+    box-shadow: none;
+    border-color: #ff6b00;
+}
+
+.search-button {
+    background-color: #ff6b00;
+    border: none;
+    color: white;
+    width: 48px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.search-button:hover {
+    background-color: #e05d00;
+}
+
+.btn-create {
+    background-color: #ff6b00;
+    color: white;
+    border: none;
+    height: 48px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.btn-create:hover {
+    background-color: #e05d00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3);
+}
+
+.btn-create:active {
+    transform: translateY(0);
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.entries-selector {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 14px;
+}
+
+.entries-select {
+    width: auto;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #333;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: #f8f8f8;
+    color: #404040;
+    font-weight: 600;
+    padding: 15px;
+    border-bottom: 2px solid #ff6b00;
+    cursor: pointer;
+    transition: all 0.2s;
+    vertical-align: middle;
+}
+
+.table thead th:hover {
+    background-color: #f1f1f1;
+}
+
+.table tbody tr {
+    transition: all 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(255, 107, 0, 0.05);
+}
+
+.table tbody td {
+    padding: 14px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-edit, .btn-delete {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.btn-edit {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #3d8b40;
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+}
+
+.records-info {
+    color: #666;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.pagination {
+    margin-bottom: 0;
+}
+
+.page-item:not(.active) .page-link {
+    color: #404040;
+}
+
+.page-item.active .page-link {
+    background-color: #ff6b00;
+    border-color: #ff6b00;
+}
+
+.page-link {
+    border: 1px solid #ddd;
+    transition: all 0.3s;
+    padding: 8px 16px;
+}
+
+.page-link:hover {
+    background-color: #f1f1f1;
+    border-color: #ddd;
+    color: #ff6b00;
+}
+
+.page-item.disabled .page-link {
+    color: #999;
+}
