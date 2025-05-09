@@ -1,8 +1,4 @@
-export interface Respuesta {
-    respuesta: RespuestaGeneral
-}
-
-export interface RespuestaGeneral{
+export interface Respuesta{
     error: boolean,
     codigo: string,
     descripcion: string

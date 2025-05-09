@@ -14,18 +14,42 @@
 
                 <form [formGroup]="formLogin">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Usuario" required formControlName="username">
+                        <input type="text" class="form-control" placeholder="Usuario" required
+                            formControlName="username" [disabled]="loading" [ngClass]="{
+                                'is-invalid': Usuario?.invalid && (Usuario?.dirty || Usuario?.touched),
+                                'is-valid': Usuario?.valid && (Usuario?.dirty || Usuario?.touched)}">
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+
+                        <div *ngIf="Usuario?.invalid && (Usuario?.dirty || Usuario?.touched)"
+                            class="invalid-feedback d-block">
+                            <div *ngIf="Usuario?.errors?.['required']">
+                                El usuario es requerido
+                            </div>
+                        </div>
                     </div>
+
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" required formControlName="password">
+                        <input type="password" class="form-control" placeholder="Contraseña" required
+                            formControlName="password" [disabled]="loading" [ngClass]="{
+                                'is-invalid': Clave?.invalid && (Clave?.dirty || Clave?.touched),
+                                'is-valid': Clave?.valid && (Clave?.dirty || Clave?.touched)
+                            }">
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+
+                        <div *ngIf="Clave?.invalid && (Clave?.dirty || Clave?.touched)"
+                            class="invalid-feedback d-block">
+                            <div *ngIf="Clave?.errors?.['required']">
+                                La contraseña es requerida
                             </div>
                         </div>
                     </div>
@@ -39,15 +63,20 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <button class="btn btn-login w-100" (click)="iniciarSesion()">Ingresar</button>
+                            <button class="btn btn-login w-100" (click)="iniciarSesion()" [disabled]="loading">
+                                <span class="button-content" [ngClass]="{'hidden': loading}">Ingresar</span>
+                                <span class="button-content processing-content" [ngClass]="{'hidden': !loading}">
+                                    <i class="fas fa-circle-notch fa-spin"></i> Procesando...
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </form>
                 <div class="links-container">
-                    <a href="#" class="forgot-password">
+                    <a href="#" class="forgot-password" [class.disabled-link]="loading">
                         <i class="fas fa-key me-1"></i> ¿Olvidaste tu contraseña?
                     </a>
-                    <a (click)="nuevoUsuario()" class="register-link">
+                    <a (click)="nuevoUsuario()" class="register-link" [class.disabled-link]="loading">
                         <i class="fas fa-user-plus register-icon"></i> ¿No tienes cuenta? Regístrate
                     </a>
                 </div>

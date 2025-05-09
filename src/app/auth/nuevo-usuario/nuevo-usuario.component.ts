@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { NuevoUsuario } from 'src/app/interfaces/nuevo-usuario';
 import { AccesoService } from 'src/app/services/acceso.service';
 
@@ -15,7 +16,7 @@ export class NuevoUsuarioComponent {
   private formBuild = inject(FormBuilder);
   private accesoService = inject(AccesoService);
 
-  constructor() {
+  constructor(private toastrService: ToastrService) {
   }
 
   public formNuevoUsuario: FormGroup = this.formBuild.group({
@@ -30,7 +31,11 @@ export class NuevoUsuarioComponent {
   })
 
   crearNuevoUsuario() {
-    if (this.formNuevoUsuario.invalid) return;
+    if (this.formNuevoUsuario.invalid) {
+      this.formNuevoUsuario.markAllAsTouched();
+      this.toastrService.warning('Por favor, complete todos los campos requeridos.');
+      return;
+    }
 
     const nuevoUsuario: NuevoUsuario = {
       identificacion: this.formNuevoUsuario.value.identificacion,
@@ -45,17 +50,17 @@ export class NuevoUsuarioComponent {
 
     this.accesoService.nuevoUsuario(nuevoUsuario).subscribe({
       next: (value) => {
-        if (!value.respuesta.error) {
-          alert(value.respuesta.descripcion);
+        if (!value.error) {
+          this.toastrService.success(value.descripcion);
         } else {
-          alert(value.respuesta.descripcion);
+          this.toastrService.error(value.descripcion);
         }
       },
       error: (err) => {
-        if (err.status === 400 && err.error) {
-          alert(err.error.descripcion); 
+        if (err.status === 400 && err.error && err.error.descripcion) {
+          this.toastrService.error(err.error.descripcion);
         } else {
-          alert('Ocurrió un error inesperado.');
+          this.toastrService.error('Ocurrió un error inesperado.');
         }
       },
     })

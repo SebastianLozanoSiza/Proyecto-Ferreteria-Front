@@ -4,7 +4,7 @@ import { Login, RespuestaLogin } from '../interfaces/login';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { NuevoUsuario } from '../interfaces/nuevo-usuario';
-import { Respuesta } from '../interfaces/respuesta';
+import { Respuesta, } from '../interfaces/respuesta';
 
 @Injectable({
   providedIn: 'root'

@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+form .ng-valid:not(form).ng-touched+.input-group-append .input-group-text {
+    border: 2px solid #29a847;
+}
+
+form .ng-valid:not(form).ng-touched {
+    border: 2px solid #29a847;
+}
+
+.ng-invalid:not(form).ng-touched+.input-group-append .input-group-text {
+    border: 1px solid red;
+}
+
+.ng-invalid:not(form).ng-touched {
+    border: 1px solid red;
+}

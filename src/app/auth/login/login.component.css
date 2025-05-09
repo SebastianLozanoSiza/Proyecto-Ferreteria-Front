@@ -37,14 +37,8 @@
 .form-control {
     height: 48px;
     border-radius: 8px 0 0 8px;
-    border: 1px solid #ced4da;
     padding-left: 15px;
     transition: all 0.3s;
-}
-
-.form-control:focus {
-    border-color: #ff6b00;
-    box-shadow: 0 0 0 0.2rem rgba(255, 107, 0, 0.25);
 }
 
 .input-group-text {
@@ -147,4 +141,59 @@
 
 .register-icon {
     color: #ff6b00;
+}
+
+.button-content {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.processing-content {
+    margin-top: -7px;
+    margin-left: -9px;
+}
+
+.hidden {
+    opacity: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.fa-circle-notch.fa-spin {
+    animation: fa-spin 1s infinite linear;
+}
+
+.btn-login {
+    position: relative;
+    min-width: 120px;
+}
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-login:disabled {
+    background-color: #ff9a57;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -7,6 +7,8 @@ import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     PagesModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

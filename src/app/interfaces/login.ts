@@ -1,4 +1,4 @@
-import { RespuestaGeneral } from "./respuesta"
+import { Respuesta } from "./respuesta"
 
 export interface Login {
     username: string,
@@ -6,6 +6,6 @@ export interface Login {
 }
 
 export interface RespuestaLogin{
-    respuesta: RespuestaGeneral,
+    respuesta: Respuesta,
     token: string
 }
