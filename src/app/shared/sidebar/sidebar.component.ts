@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  public menuItems: any[] = [{
+    titulo: 'Dashboard',
+    icono: 'nav-icon fas fa-tachometer-alt',
+    submenu: [
+      { titulo: 'Clientes', icon: 'far fa-circle', routerLink: '/dashboard/clientes' },
+      { titulo: 'Empleados', icon: 'far fa-circle', routerLink: '/dashboard/empleados' },
+      { titulo: 'Departamentos', icon: 'far fa-circle', routerLink: '/dashboard/departamentos' }
+    ]
+  }];
+
+  logout() {
+    location.href = 'login';
+  }
 }

@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { ProductosComponent } from './productos/productos.component';
+import { EmpleadosComponent } from './empleados/empleados.component';
+import { DepartamentosComponent } from './departamentos/departamentos.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: PagesComponent,
     children: [
-
+      { path: '', component: ProductosComponent, data: { titulo: 'Productos' } },
+      { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
+      { path: 'empleados', component: EmpleadosComponent, data: { titulo: 'Empleados' } },
+      { path: 'departamentos', component: DepartamentosComponent, data: { titulo: 'Departamentos' } }
     ]
   }
 ];

@@ -1,1 +1,57 @@
-<p>login works!</p>
+<div class="login-page" cz-shortcut-listen="true" style="min-height: 464px;">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a class="h1">
+                    <i class="fas fa-hammer logo-icon"></i>
+                    <b>Toolify</b></a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">
+                    <i class="fas fa-tools tool-icon"></i>
+                    Inicia sesión en tu cuenta
+                </p>
+
+                <form [formGroup]="formLogin">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Usuario" required formControlName="username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" required formControlName="password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-7">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember">
+                                <label class="remember-label" for="remember">
+                                    Recordarme
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <button class="btn btn-login w-100" (click)="iniciarSesion()">Ingresar</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="links-container">
+                    <a href="#" class="forgot-password">
+                        <i class="fas fa-key me-1"></i> ¿Olvidaste tu contraseña?
+                    </a>
+                    <a (click)="nuevoUsuario()" class="register-link">
+                        <i class="fas fa-user-plus register-icon"></i> ¿No tienes cuenta? Regístrate
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
