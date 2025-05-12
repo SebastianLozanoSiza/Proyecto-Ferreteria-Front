@@ -8,6 +8,7 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { ProductosComponent } from './productos/productos.component';
 import { DepartamentosComponent } from './departamentos/departamentos.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DepartamentosComponent } from './departamentos/departamentos.component'
   imports: [
     CommonModule,
     PagesRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }
