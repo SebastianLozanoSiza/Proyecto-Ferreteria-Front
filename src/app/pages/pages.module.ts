@@ -9,6 +9,7 @@ import { EmpleadosComponent } from './empleados/empleados.component';
 import { ProductosComponent } from './productos/productos.component';
 import { DepartamentosComponent } from './departamentos/departamentos.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CrearProductosComponent } from './productos/crear-productos/crear-productos.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClientesComponent,
     EmpleadosComponent,
     ProductosComponent,
-    DepartamentosComponent
+    DepartamentosComponent,
+    CrearProductosComponent
   ],
   imports: [
     CommonModule,

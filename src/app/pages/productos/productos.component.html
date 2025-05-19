@@ -1,1 +1,126 @@
-<p>productos works!</p>
+<section class="productos-section">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">
+                        <i class="fas fa-map-marked-alt"></i> Productos
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container-fluid">
+            <!-- Barra de búsqueda y botón crear -->
+            <div class="row mb-4 justify-content-center">
+                <div class="col-md-3 text-center">
+                    <div class="input-group search-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar producto...">
+                        <div class="input-group-append">
+                            <button class="input-group-text search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-end">
+                    <button class="btn btn-create" (click)="crearProducto()">
+                        <i class="fas fa-plus-circle me-2"></i>Crear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenedor de la tabla -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Selector de registros por página -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="entries-selector">
+                                <span>Mostrar </span>
+                                <select class="form-select entries-select">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                                <span> registros por página</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de departamentos -->
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 18%;">Producto</th>
+                                    <th scope="col" style="width: 25%;">Descripción</th>
+                                    <th scope="col" style="width: 15%;">Categoría</th>
+                                    <th scope="col" style="width: 10%;">Precio</th>
+                                    <th scope="col" style="width: 10%;">Stock</th>
+                                    <th scope="col" style="width: 15%;">Ferretería</th>
+                                    <th scope="col" class="text-center" style="width: 7%;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let producto of listaProductos">
+                                    <td>{{ producto.nombreProducto }}</td>
+                                    <td>{{ producto.descripcion }}</td>
+                                    <td>{{ producto.categoria }}</td>
+                                    <td>{{ producto.precio }}</td>
+                                    <td>{{ producto.stock }}</td>
+                                    <td>{{ producto.razonSocialFerreteria }}</td>
+                                    <td class="text-center">
+                                        <div class="action-buttons">
+                                            <button class="btn btn-edit" title="Editar" (click)="editarProducto(producto)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-delete" title="Eliminar" (click)="eliminarProducto(producto)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="listaProductos.length === 0">
+                                    <td colspan="7" class="text-center">No se encontraron departamentos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Información de registros -->
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="records-info">
+                                Mostrando registros del {{ 1 }} al {{ 5 }} de un total de {{ 25 }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Paginación -->
+                    <div class="row justify-content-center">
+                        <nav aria-label="Navegación de páginas">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">
+                                        <i class="fas fa-chevron-left"></i> Anterior
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">{{ 1 }}</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">
+                                        Siguiente <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

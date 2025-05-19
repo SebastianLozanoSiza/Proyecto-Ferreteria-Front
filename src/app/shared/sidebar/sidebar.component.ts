@@ -13,7 +13,8 @@ export class SidebarComponent {
   public menuItems: any[] = [
     { titulo: 'Clientes', icono: 'fas fa-users', routerLink: '/dashboard/clientes' },
     { titulo: 'Empleados', icono: 'fas fa-user-tie', routerLink: '/dashboard/empleados' },
-    { titulo: 'Departamentos', icono: 'fas fa-map-marked-alt', routerLink: '/dashboard/departamentos' }
+    { titulo: 'Departamentos', icono: 'fas fa-map-marked-alt', routerLink: '/dashboard/departamentos' },
+    { titulo: 'Productos', icono: 'fas fa-box-open', routerLink: '/dashboard/productos' }
   ];
 
   logout() {

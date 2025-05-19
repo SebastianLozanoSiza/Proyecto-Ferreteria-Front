@@ -1,0 +1,133 @@
+<div class="ferreteria-modal-container">
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i class="fas fa-tools tool-icon" aria-hidden="true"></i>
+      <span>Nuevo Producto</span>
+    </h2>
+    <button type="button" class="close-button" (click)="cerrar()" aria-label="Cerrar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <form class="product-form" [formGroup]="formCrearProducto">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombreProducto">
+          <i class="fas fa-tag" aria-hidden="true"></i>
+          Nombre del Producto
+        </label>
+        <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto"
+          placeholder="Ej: Martillo de bola 16oz"
+          [ngClass]="{'is-invalid': formCrearProducto.get('nombreProducto')?.invalid && formCrearProducto.get('nombreProducto')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formCrearProducto.get('nombreProducto')?.invalid && formCrearProducto.get('nombreProducto')?.touched">
+          Por favor ingrese el nombre del producto.
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="nombreProducto">
+          <i class="fas fa-boxes" aria-hidden="true"></i>
+          Categoría
+        </label>
+        <input type="text" class="form-control" id="categoria" formControlName="categoria"
+          placeholder="Ej: Herramientas de construcción"
+          [ngClass]="{'is-invalid': formCrearProducto.get('categoria')?.invalid && formCrearProducto.get('categoria')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formCrearProducto.get('categoria')?.invalid && formCrearProducto.get('categoria')?.touched">
+          Por favor ingrese el nombre de la categoría.
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">
+        <i class="fas fa-align-left" aria-hidden="true"></i>
+        Descripción
+      </label>
+      <textarea class="form-control" id="descripcion" formControlName="descripcion" rows="3"
+        placeholder="Describa las características principales del producto"
+        [ngClass]="{'is-invalid': formCrearProducto.get('descripcion')?.invalid && formCrearProducto.get('descripcion')?.touched}"></textarea>
+      <div class="invalid-feedback"
+        *ngIf="formCrearProducto.get('descripcion')?.invalid && formCrearProducto.get('descripcion')?.touched">
+        Por favor ingrese la descripción del producto.
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="precio">
+          <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+          Precio unitario
+        </label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input type="number" class="form-control" id="precio" formControlName="precio" min="0" step="0.01"
+            placeholder="0.00"
+            [ngClass]="{'is-invalid': formCrearProducto.get('precio')?.invalid && formCrearProducto.get('precio')?.touched}">
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="formCrearProducto.get('precio')?.errors?.['required'] && formCrearProducto.get('precio')?.touched">
+          El precio es obligatorio.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="formCrearProducto.get('precio')?.errors?.['min'] && formCrearProducto.get('precio')?.touched">
+          El precio debe ser mayor a 0.
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="stock">
+          <i class="fas fa-inventory" aria-hidden="true"></i>
+          Stock inicial
+        </label>
+        <input type="number" class="form-control" id="stock" formControlName="stock" min="0" placeholder="0">
+        <div class="invalid-feedback"
+          *ngIf="formCrearProducto.get('stock')?.errors?.['required'] && formCrearProducto.get('stock')?.touched">
+          El stock es obligatorio.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="formCrearProducto.get('stock')?.errors?.['min'] && formCrearProducto.get('stock')?.touched">
+          El stock no puede ser negativo.
+        </div>
+
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="idFerreteria">
+          <i class="fas fa-store" aria-hidden="true"></i>
+          Ferretería
+        </label>
+        <select class="form-select h-38" id="idFerreteria" formControlName="idFerreteria"
+          [ngClass]="{'is-invalid': formCrearProducto.get('idFerreteria')?.invalid && formCrearProducto.get('idFerreteria')?.touched}">
+          <option value="" selected disabled>Seleccione una sucursal</option>
+          <option *ngFor="let ferreteria of listaFerreterias" [value]="ferreteria.idFerreteria">
+            {{ferreteria.razonSocial}}
+          </option>
+        </select>
+        <div class="invalid-feedback"
+          *ngIf="formCrearProducto.get('idFerreteria')?.invalid && formCrearProducto.get('idFerreteria')?.touched">
+          Por favor seleccione una ferretería.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <div class="action-message" *ngIf="guardando">
+        <i class="fas fa-circle-notch fa-spin"></i> Guardando...
+      </div>
+      <div class="buttons-container" *ngIf="!guardando">
+        <button type="button" class="btn btn-secondary" (click)="cerrar()">
+          <i class="fas fa-times-circle" aria-hidden="true"></i>
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="crearProducto()">
+          <i class="fas fa-save" aria-hidden="true"></i>
+          Guardar Producto
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

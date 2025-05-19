@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './custom/auth.interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthInterceptor } from './custom/auth.interceptor';
     PagesModule,
     AuthModule,
     HttpClientModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
