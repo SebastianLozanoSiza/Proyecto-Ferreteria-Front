@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bienvenida',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./bienvenida.component.css']
 })
 export class BienvenidaComponent {
+
+  private router = inject(Router);
+
+  productos(){
+    this.router.navigate(['/dashboard/productos'])
+
+  }
 
 }
