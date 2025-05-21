@@ -5,6 +5,7 @@ import { CrearClienteComponent } from 'src/app/pages/clientes/editar-cliente/edi
 import { AccesoService } from 'src/app/services/acceso.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { PermisosService } from 'src/app/services/permisos.service';
+import { TerceroService } from 'src/app/services/tercero.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit {
 
   private router = inject(Router);
   private permisosService = inject(PermisosService);
-  private clienteService = inject(ClienteService);
+  private terceroService = inject(TerceroService);
   private accesoService = inject(AccesoService);
 
   private usuario: string = this.accesoService.getUSerToken();
@@ -48,12 +49,12 @@ export class SidebarComponent implements OnInit {
   }
 
   openEditarUsuario() {
-  this.clienteService.buscarClientePorId(this.usuario).subscribe({
+  this.terceroService.buscarTerceroPorNombreDeUsuario(this.usuario).subscribe({
     next: (resp) => {
-      if (resp.clientes && resp.clientes.length > 0) {
+      if (resp.terceros && resp.terceros.length > 0) {
         this.dialog.open(CrearClienteComponent, {
           maxHeight: "80vh",
-          data: resp.clientes[0]
+          data: resp.terceros[0]
         });
       }
     }

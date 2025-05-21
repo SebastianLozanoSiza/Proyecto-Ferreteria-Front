@@ -2,9 +2,9 @@ import { Component, inject, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Clientes } from 'src/app/interfaces/cliente';
 import { NuevoUsuario } from 'src/app/interfaces/nuevo-usuario';
-import { ClienteService } from 'src/app/services/cliente.service';
+import { Tercero } from 'src/app/interfaces/tercero';
+import { TerceroService } from 'src/app/services/tercero.service';
 
 @Component({
   selector: 'app-crear-cliente',
@@ -14,13 +14,13 @@ import { ClienteService } from 'src/app/services/cliente.service';
 export class CrearClienteComponent implements OnInit {
 
   public formBuild = inject(FormBuilder);
-  public clienteService = inject(ClienteService);
+  public terceroService = inject(TerceroService);
 
   public guardando = false;
   public mostrarPassword = false;
   public mostrarConfirmPassword = false;
 
-  constructor(private dialogRef: MatDialogRef<CrearClienteComponent>, private toastService: ToastrService, @Inject(MAT_DIALOG_DATA) public datosCliente: Clientes) {
+  constructor(private dialogRef: MatDialogRef<CrearClienteComponent>, private toastService: ToastrService, @Inject(MAT_DIALOG_DATA) public datosCliente: Tercero) {
 
   }
 
@@ -36,17 +36,21 @@ export class CrearClienteComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.listarTercero();
+  }
+
+  listarTercero() {
     if (this.datosCliente && this.datosCliente.nombreUsuario) {
-      this.clienteService.buscarClientePorId(this.datosCliente.nombreUsuario).subscribe({
+      this.terceroService.buscarTerceroPorNombreDeUsuario(this.datosCliente.nombreUsuario).subscribe({
         next: (value) => {
           this.formEditarCliente.patchValue({
-            identificacion: value.clientes[0].identificacion,
-            nombre: value.clientes[0].nombre,
-            apellidos: value.clientes[0].apellidos,
-            correo: value.clientes[0].correo,
-            direccion: value.clientes[0].direccion,
-            telefono: value.clientes[0].telefono,
-            nombreUsuario: value.clientes[0].nombreUsuario,
+            identificacion: value.terceros[0].identificacion,
+            nombre: value.terceros[0].nombre,
+            apellidos: value.terceros[0].apellidos,
+            correo: value.terceros[0].correo,
+            direccion: value.terceros[0].direccion,
+            telefono: value.terceros[0].telefono,
+            nombreUsuario: value.terceros[0].nombreUsuario,
           });
         },
         error: (err) => {
@@ -69,7 +73,7 @@ export class CrearClienteComponent implements OnInit {
     }
     this.guardando = true;
 
-    const cliente: NuevoUsuario = {
+    const tercero: NuevoUsuario = {
       identificacion: this.formEditarCliente.value.identificacion,
       nombre: this.formEditarCliente.value.nombre,
       apellidos: this.formEditarCliente.value.apellidos,
@@ -80,23 +84,28 @@ export class CrearClienteComponent implements OnInit {
       contrasena: this.formEditarCliente.value.contrasena
     }
 
-    this.clienteService.editarCliente(this.datosCliente.idCliente, cliente).subscribe({
+    this.terceroService.editarTercero(this.datosCliente.idTercero, tercero).subscribe({
       next: (value) => {
         this.guardando = false;
-        if (!value.error) {
-          this.toastService.success(value.descripcion);
+        if (!value.respuesta.error) {
+          if (this.datosCliente.nombreUsuario !== tercero.nombreUsuario) {
+            localStorage.setItem('nombreUsuario', tercero.nombreUsuario);
+            localStorage.setItem('token', value.token);
+          }
+          this.toastService.success(value.respuesta.descripcion);
+          this.listarTercero();
         } else {
-          this.toastService.error(value.descripcion);
+          this.toastService.error(value.respuesta.descripcion);
         }
       },
       error: (err) => {
         this.guardando = false;
         if (err.status === 500) {
-          this.toastService.error(err.error.descripcion)
+          this.toastService.error(err.error.respuesta.descripcion)
         } else if (err.status === 400) {
-          this.toastService.error(err.error.descripcion)
+          this.toastService.error(err.error.respuesta.descripcion)
         } else if (err.status === 404) {
-          this.toastService.error(err.error.descripcion)
+          this.toastService.error(err.error.respuesta.descripcion)
         }
       }
     })
