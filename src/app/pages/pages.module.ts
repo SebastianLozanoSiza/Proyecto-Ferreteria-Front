@@ -10,6 +10,8 @@ import { ProductosComponent } from './productos/productos.component';
 import { DepartamentosComponent } from './departamentos/departamentos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CrearProductosComponent } from './productos/crear-productos/crear-productos.component';
+import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { CrearClienteComponent } from './clientes/editar-cliente/editar-cliente.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { CrearProductosComponent } from './productos/crear-productos/crear-produ
     EmpleadosComponent,
     ProductosComponent,
     DepartamentosComponent,
-    CrearProductosComponent
+    CrearProductosComponent,
+    BienvenidaComponent,
+    CrearClienteComponent
   ],
   imports: [
     CommonModule,

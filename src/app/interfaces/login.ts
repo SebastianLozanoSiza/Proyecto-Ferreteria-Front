@@ -7,5 +7,6 @@ export interface Login {
 
 export interface RespuestaLogin{
     respuesta: Respuesta,
-    token: string
+    token: string,
+    nombreUsuario: string
 }

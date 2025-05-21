@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 text-end">
+                <div class="col-md-2 text-end" *ngIf="!permisoCrear">
                     <button class="btn btn-create" (click)="crearProducto()">
                         <i class="fas fa-plus-circle me-2"></i>Crear
                     </button>
@@ -62,7 +62,7 @@
                                     <th scope="col" style="width: 10%;">Precio</th>
                                     <th scope="col" style="width: 10%;">Stock</th>
                                     <th scope="col" style="width: 15%;">Ferretería</th>
-                                    <th scope="col" class="text-center" style="width: 7%;">Acciones</th>
+                                    <th *ngIf="!permisoEditar || !permisoEliminar" scope="col" class="text-center" style="width: 7%;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,7 +73,7 @@
                                     <td>{{ producto.precio }}</td>
                                     <td>{{ producto.stock }}</td>
                                     <td>{{ producto.razonSocialFerreteria }}</td>
-                                    <td class="text-center">
+                                    <td *ngIf="!permisoEditar || !permisoEliminar" class="text-center">
                                         <div class="action-buttons">
                                             <button class="btn btn-edit" title="Editar" (click)="editarProducto(producto)">
                                                 <i class="fas fa-edit"></i>

@@ -16,11 +16,16 @@ export class AccesoService {
 
   constructor() { }
 
-  login(login: Login):Observable<RespuestaLogin>{
+  login(login: Login): Observable<RespuestaLogin> {
     return this.http.post<RespuestaLogin>(`${this.baseUrl}login`, login)
   }
 
-  nuevoUsuario(nuevoUsuario: NuevoUsuario): Observable<Respuesta>{
+  nuevoUsuario(nuevoUsuario: NuevoUsuario): Observable<Respuesta> {
     return this.http.post<Respuesta>(`${this.baseUrl}registrarNuevo`, nuevoUsuario);
+  }
+
+  getUSerToken() {
+    let user = localStorage.getItem("nombreUsuario");
+    return user ? user : "";
   }
 }

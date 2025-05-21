@@ -1,0 +1,160 @@
+<div class="ferreteria-modal-container">
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i class="fas fa-user-edit user-icon" aria-hidden="true"></i>
+      <span>Editar Usuario</span>
+    </h2>
+    <button type="button" class="close-button" (click)="cerrar()" aria-label="Cerrar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <form class="user-form" [formGroup]="formEditarCliente">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="identificacion">
+          <i class="fas fa-id-card" aria-hidden="true"></i>
+          Identificación
+        </label>
+        <input type="text" class="form-control" id="identificacion" formControlName="identificacion"
+          placeholder="Ej: 1234567890"
+          [ngClass]="{'is-invalid': formEditarCliente.get('identificacion')?.invalid && formEditarCliente.get('identificacion')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('identificacion')?.invalid && formEditarCliente.get('identificacion')?.touched">
+          Por favor ingrese un número de identificación válido.
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="nombreUsuario">
+          <i class="fas fa-user" aria-hidden="true"></i>
+          Nombre de Usuario
+        </label>
+        <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario"
+          placeholder="Ej: usuario123"
+          [ngClass]="{'is-invalid': formEditarCliente.get('nombreUsuario')?.invalid && formEditarCliente.get('nombreUsuario')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('nombreUsuario')?.invalid && formEditarCliente.get('nombreUsuario')?.touched">
+          Por favor ingrese un nombre de usuario válido.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombre">
+          <i class="fas fa-signature" aria-hidden="true"></i>
+          Nombre
+        </label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ej: Juan"
+          [ngClass]="{'is-invalid': formEditarCliente.get('nombre')?.invalid && formEditarCliente.get('nombre')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('nombre')?.invalid && formEditarCliente.get('nombre')?.touched">
+          Por favor ingrese su nombre.
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="apellidos">
+          <i class="fas fa-signature" aria-hidden="true"></i>
+          Apellidos
+        </label>
+        <input type="text" class="form-control" id="apellidos" formControlName="apellidos"
+          placeholder="Ej: Pérez González"
+          [ngClass]="{'is-invalid': formEditarCliente.get('apellidos')?.invalid && formEditarCliente.get('apellidos')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('apellidos')?.invalid && formEditarCliente.get('apellidos')?.touched">
+          Por favor ingrese sus apellidos.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="direccion">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        Dirección
+      </label>
+      <input type="text" class="form-control" id="direccion" formControlName="direccion"
+        placeholder="Ej: Calle 123 #45-67, Ciudad"
+        [ngClass]="{'is-invalid': formEditarCliente.get('direccion')?.invalid && formEditarCliente.get('direccion')?.touched}">
+      <div class="invalid-feedback"
+        *ngIf="formEditarCliente.get('direccion')?.invalid && formEditarCliente.get('direccion')?.touched">
+        Por favor ingrese una dirección válida.
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="correo">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          Correo Electrónico
+        </label>
+        <input type="email" class="form-control" id="correo" formControlName="correo"
+          placeholder="Ej: usuario@ejemplo.com"
+          [ngClass]="{'is-invalid': formEditarCliente.get('correo')?.invalid && formEditarCliente.get('correo')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('correo')?.errors?.['required'] && formEditarCliente.get('correo')?.touched">
+          El correo electrónico es obligatorio.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('correo')?.errors?.['email'] && formEditarCliente.get('correo')?.touched">
+          Por favor ingrese un correo electrónico válido.
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="telefono">
+          <i class="fas fa-phone" aria-hidden="true"></i>
+          Teléfono
+        </label>
+        <input type="tel" class="form-control" id="telefono" formControlName="telefono" placeholder="Ej: 3001234567"
+          [ngClass]="{'is-invalid': formEditarCliente.get('telefono')?.invalid && formEditarCliente.get('telefono')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('telefono')?.invalid && formEditarCliente.get('telefono')?.touched">
+          Por favor ingrese un número de teléfono válido.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="password">
+          <i class="fas fa-lock" aria-hidden="true"></i>
+          Contraseña
+        </label>
+        <div class="password-container">
+          <input type="password" class="form-control" id="password" formControlName="contrasena" placeholder="••••••••"
+            [ngClass]="{'is-invalid': formEditarCliente.get('contrasena')?.invalid && formEditarCliente.get('contrasena')?.touched}">
+          <button type="button" class="password-toggle">
+            <i class="fas"></i>
+          </button>
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('contrasena')?.errors?.['required'] && formEditarCliente.get('contrasena')?.touched">
+          La contraseña es obligatoria.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="formEditarCliente.get('contrasena')?.errors?.['minlength'] && formEditarCliente.get('contrasena')?.touched">
+          La contraseña debe tener al menos 8 caracteres.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-actions">
+      <div class="action-message" *ngIf="guardando">
+        <i class="fas fa-circle-notch fa-spin"></i> Guardando...
+      </div>
+      <div class="buttons-container" *ngIf="!guardando">
+        <button type="button" class="btn btn-secondary" (click)="cerrar()">
+          <i class="fas fa-times-circle" aria-hidden="true"></i>
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="editarCliente()" [disabled]="formEditarCliente.invalid">
+          <i class="fas fa-save" aria-hidden="true"></i>
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

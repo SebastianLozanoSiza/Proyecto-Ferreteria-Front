@@ -6,6 +6,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { DepartamentosComponent } from './departamentos/departamentos.component';
 import { authGuard } from '../custom/auth.guard';
+import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
     component: PagesComponent,
     canActivate: [authGuard],
     children: [
-      { path: '', component: ProductosComponent, data: { titulo: 'Productos' } },
+      { path: '', component: BienvenidaComponent, data: { titulo: 'Bienvenida' } },
       { path: 'productos', component: ProductosComponent, data: { titulo: 'Productos' } },
       { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
       { path: 'empleados', component: EmpleadosComponent, data: { titulo: 'Empleados' } },

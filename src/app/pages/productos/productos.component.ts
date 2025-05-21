@@ -4,6 +4,7 @@ import { CrearProducto, Productos } from 'src/app/interfaces/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { CrearProductosComponent } from './crear-productos/crear-productos.component';
 import Swal from 'sweetalert2';
+import { PermisosService } from 'src/app/services/permisos.service';
 
 @Component({
   selector: 'app-productos',
@@ -15,7 +16,12 @@ export class ProductosComponent implements OnInit {
   public listaProductos: Productos[] = [];
 
   public productosService = inject(ProductoService);
+  private permisosService = inject(PermisosService);
   public dialog = inject(MatDialog);
+
+  public permisoCrear: boolean = false;
+  public permisoEditar: boolean = false;
+  public permisoEliminar: boolean = false;
 
   ngOnInit(): void {
     this.listarProductos();
@@ -103,6 +109,19 @@ export class ProductosComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  verificarPermisos(){
+    this.permisosService.listarModulos().subscribe({
+      next:(value)=> {
+          if (!value.respuesta.error) {
+            const modulo = value.modulos.find(m => m.nombreModulo === 'Productos');
+            this.permisoCrear = modulo ? modulo.crear : false;
+            this.permisoEditar = modulo ? modulo.actualizar : false;
+            this.permisoEliminar = modulo ? modulo.eliminar : false;
+          }
+      },
     });
   }
 

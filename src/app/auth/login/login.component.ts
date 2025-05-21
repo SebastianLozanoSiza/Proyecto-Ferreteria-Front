@@ -47,6 +47,7 @@ export class LoginComponent {
         next: (value) => {
           if (!value.respuesta.error) {
             localStorage.setItem("token", value.token);
+            localStorage.setItem("nombreUsuario", value.nombreUsuario);
             this.router.navigate(['/dashboard'])
           } else {
             (value.respuesta.descripcion);
