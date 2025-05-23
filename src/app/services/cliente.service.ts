@@ -17,19 +17,19 @@ export class ClienteService {
   constructor() { }
 
 
-  listarClientes(){
-    
+  listarClientes(): Observable<ListarClientes> {
+    return this.http.get<ListarClientes>(`${this.baseUrl}/listarClientes`)
   }
 
-  buscarClientePorId(nombreUsuario:string):Observable<ListarClientes>{
+  buscarClientePorId(nombreUsuario: string): Observable<ListarClientes> {
     return this.http.get<ListarClientes>(`${this.baseUrl}/buscarClientePorUsuario/${nombreUsuario}`)
   }
 
-  editarCliente(id: number, cliente: NuevoUsuario):Observable<Respuesta>{
+  editarCliente(id: number, cliente: NuevoUsuario): Observable<Respuesta> {
     return this.http.put<Respuesta>(`${this.baseUrl}/actualizarCliente/${id}`, cliente)
   }
 
-  eliminarCliente(id: number):Observable<Respuesta>{
+  eliminarCliente(id: number): Observable<Respuesta> {
     return this.http.delete<Respuesta>(`${this.baseUrl}/eliminarCliente/${id}`)
   }
 
