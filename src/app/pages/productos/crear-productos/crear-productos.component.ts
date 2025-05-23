@@ -124,8 +124,6 @@ export class CrearProductosComponent implements OnInit {
         }
       })
     }
-
-
   }
 
   cerrar(): void {

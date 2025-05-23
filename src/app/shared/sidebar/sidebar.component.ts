@@ -49,19 +49,22 @@ export class SidebarComponent implements OnInit {
   }
 
   openEditarUsuario() {
-  this.terceroService.buscarTerceroPorNombreDeUsuario(this.usuario).subscribe({
-    next: (resp) => {
-      if (resp.terceros && resp.terceros.length > 0) {
-        this.dialog.open(CrearClienteComponent, {
-          maxHeight: "80vh",
-          data: resp.terceros[0]
-        });
+    this.terceroService.buscarTerceroPorNombreDeUsuario(this.usuario).subscribe({
+      next: (resp) => {
+        if (resp.terceros && resp.terceros.length > 0) {
+          this.dialog.open(CrearClienteComponent, {
+            maxHeight: "80vh",
+            data: resp.terceros[0]
+          });
+        }
       }
-    }
-  });
+    });
   }
 
+  bienvenida() {
+    this.router.navigate(['/dashboard'])
 
+  }
 
   logout() {
     localStorage.removeItem('token');

@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CrearProductosComponent } from './productos/crear-productos/crear-productos.component';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { CrearClienteComponent } from './clientes/editar-cliente/editar-cliente.component';
+import { CrearDepartamentoComponent } from './departamentos/crear-departamento/crear-departamento.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -23,13 +25,15 @@ import { CrearClienteComponent } from './clientes/editar-cliente/editar-cliente.
     DepartamentosComponent,
     CrearProductosComponent,
     BienvenidaComponent,
-    CrearClienteComponent
+    CrearClienteComponent,
+    CrearDepartamentoComponent
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule
   ]
 })
 export class PagesModule { }

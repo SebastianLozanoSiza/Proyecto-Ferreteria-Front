@@ -191,6 +191,10 @@
     margin-bottom: 0;
 }
 
+.page-item{
+    cursor: pointer;
+}
+
 .page-item:not(.active) .page-link {
     color: #404040;
 }

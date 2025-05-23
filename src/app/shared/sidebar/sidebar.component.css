@@ -1,3 +1,45 @@
 a{
     cursor: pointer;
 }
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 0.5rem;
+  transition: all 0.3s;
+  white-space: nowrap;
+  border-bottom: 1px solid #4b545c;
+  text-decoration: none;
+}
+
+.brand-link:hover {
+  background-color: rgba(255, 107, 0, 0.1);
+}
+
+.brand-link .brand-image {
+  float: left;
+  line-height: 0.8;
+  max-height: 33px;
+  width: 33px;
+  margin-top: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-link .brand-text {
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 400 !important;
+}
+
+.brand-link:hover .brand-image {
+  animation: toolRotate 0.5s ease-in-out;
+}
+
+@keyframes toolRotate {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}

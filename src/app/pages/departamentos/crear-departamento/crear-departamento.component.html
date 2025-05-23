@@ -1,0 +1,45 @@
+<div class="ferreteria-modal-container">
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i class="fas fa-map-marked-alt tool-icon" aria-hidden="true"></i>
+      <span>Nuevo Departamento</span>
+    </h2>
+    <button type="button" class="close-button" (click)="cerrar()" aria-label="Cerrar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <form class="departamento-form" [formGroup]="formCrearDepartamento">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="nombre">
+          <i class="fas fa-flag" aria-hidden="true"></i>
+          Nombre del departamento
+        </label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre"
+          [ngClass]="{'is-invalid': formCrearDepartamento.get('nombre')?.invalid && formCrearDepartamento.get('nombre')?.touched}">
+        <div class="invalid-feedback"
+          *ngIf="formCrearDepartamento.get('nombre')?.invalid && formCrearDepartamento.get('nombre')?.touched">
+          Por favor ingrese el nombre del departamento.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <div class="action-message" *ngIf="guardando">
+        <i class="fas fa-circle-notch fa-spin"></i> Guardando...
+      </div>
+      <div class="buttons-container" *ngIf="!guardando">
+        <button type="button" class="btn btn-secondary" (click)="cerrar()">
+          <i class="fas fa-times-circle" aria-hidden="true"></i>
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="crearDepartamento()">
+          <i class="fas fa-save" aria-hidden="true"></i>
+          Guardar Departamento
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
