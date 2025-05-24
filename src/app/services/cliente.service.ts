@@ -17,8 +17,8 @@ export class ClienteService {
   constructor() { }
 
 
-  listarClientes(): Observable<ListarClientes> {
-    return this.http.get<ListarClientes>(`${this.baseUrl}/listarClientes`)
+  listarClientes(identificacion: string, nombre: string, correo: string): Observable<ListarClientes> {
+    return this.http.get<ListarClientes>(`${this.baseUrl}/listarClientes?identificacion=${identificacion}&nombre=${nombre}&correo=${correo}`)
   }
 
   buscarClientePorId(nombreUsuario: string): Observable<ListarClientes> {

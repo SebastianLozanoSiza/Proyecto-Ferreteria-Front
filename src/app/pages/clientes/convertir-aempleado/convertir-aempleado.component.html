@@ -1,0 +1,114 @@
+<div class="ferreteria-modal-container">
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i class="fas fa-user-tie convert-icon" aria-hidden="true"></i>
+      <span>Convertir Cliente a Empleado</span>
+    </h2>
+    <button type="button" class="close-button" (click)="cerrar()" aria-label="Cerrar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <form class="conversion-form" [formGroup]="formConvertirCliente">
+    <!-- Información del cliente seleccionado -->
+    <!-- <div class="client-info-card" *ngIf="clienteSeleccionado"> -->
+    <div class="client-info-card" >
+      <div class="client-info-header">
+        <i class="fas fa-user-circle"></i>
+        <span>Cliente Seleccionado</span>
+      </div>
+      <div class="client-details">
+        <div class="client-detail-item">
+          <i class="fas fa-signature"></i>
+          <span><strong>{{datosCliente.nombre}}</strong></span>
+        </div>
+        <div class="client-detail-item">
+          <i class="fas fa-id-card"></i>
+          <span>DNI: {{datosCliente.identificacion}}</span>
+        </div>
+        <!-- <div class="client-detail-item" *ngIf="clienteSeleccionado.email"> -->
+        <div class="client-detail-item">
+          <i class="fas fa-envelope"></i>
+          <span>{{datosCliente.correo}}</span>
+        </div>
+        <!-- <div class="client-detail-item" *ngIf="clienteSeleccionado.telefono"> -->
+        <div class="client-detail-item" >
+          <i class="fas fa-phone"></i>
+          <span>{{datosCliente.telefono}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advertencia -->
+    <div class="conversion-warning">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <div class="warning-content">
+        <div class="warning-title">Importante</div>
+        <div class="warning-text">
+          Al convertir este cliente en empleado, se le asignará acceso al sistema y podrá realizar operaciones según el rol seleccionado.
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario de conversión -->
+    <div class="form-group">
+      <label for="clienteId">
+        <i class="fas fa-user"></i>
+        Cliente
+      </label>
+      <input type="text" id="idTercero" formControlName="nombreCliente" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="idRol">
+        <i class="fas fa-user-tag"></i>
+        Rol del Empleado
+      </label>
+      <select class="form-select" id="idRol" formControlName="idRol"
+        [ngClass]="{'is-invalid': formConvertirCliente.get('idRol')?.invalid && formConvertirCliente.get('idRol')?.touched}">
+        <option value="" disabled>Seleccione un rol</option>
+        <option *ngFor="let rol of listaRoles" [value]="rol.idRol">
+          {{rol.nombreRol}}
+        </option>
+      </select>
+      <div class="invalid-feedback"
+        *ngIf="formConvertirCliente.get('idRol')?.invalid && formConvertirCliente.get('idRol')?.touched">
+        Por favor seleccione un rol.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="idFerreteria">
+        <i class="fas fa-store"></i>
+        Ferretería de Asignación
+      </label>
+      <select class="form-select" id="idFerreteria" formControlName="idFerreteria"
+        [ngClass]="{'is-invalid': formConvertirCliente.get('idFerreteria')?.invalid && formConvertirCliente.get('idFerreteria')?.touched}">
+        <option value="" disabled>Seleccione una ferretería</option>
+        <option *ngFor="let ferreteria of listaFerreterias" [value]="ferreteria.idFerreteria">
+          {{ferreteria.razonSocial}}
+        </option>
+      </select>
+      <div class="invalid-feedback"
+        *ngIf="formConvertirCliente.get('idFerreteria')?.invalid && formConvertirCliente.get('idFerreteria')?.touched">
+        Por favor seleccione una ferretería.
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <div class="action-message" *ngIf="guardando">
+        <i class="fas fa-circle-notch fa-spin"></i> Convirtiendo cliente...
+      </div>
+      <div class="buttons-container" *ngIf="!guardando">
+        <button type="button" class="btn btn-secondary" (click)="cerrar()">
+          <i class="fas fa-times-circle" aria-hidden="true"></i>
+          Cancelar
+        </button>
+        <button class="btn btn-primary" (click)="convertirCliente()">
+          <i class="fas fa-user-plus" aria-hidden="true"></i>
+          Convertir a Empleado
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

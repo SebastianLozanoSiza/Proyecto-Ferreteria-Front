@@ -15,22 +15,65 @@
         <div class="container-fluid">
             <!-- Barra de búsqueda y botón crear -->
             <div class="row mb-4 justify-content-center">
-                <div class="col-md-3 text-center">
+                <div class="col-md-3">
                     <div class="input-group search-group mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar clientes...">
-                            <!-- [formControl]="buscar" [matAutocomplete]="auto" (focus)="buscar.setValue(buscar.value || '')"> -->
-                        <!-- <mat-autocomplete #auto="matAutocomplete"
-                            (optionSelected)="seleccionarSugerencia($event.option.value)">
-                            <mat-option *ngFor="let sugerencia of sugerencias | async" [value]="sugerencia">
-                                {{ sugerencia.nombre }}
+                        <input type="text" class="form-control" placeholder="Buscar por identificacion.."
+                            [formControl]="buscarIdentificacion" [matAutocomplete]="autoIdentificacion"
+                            (focus)="buscarIdentificacion.setValue(buscarIdentificacion.value || '')">
+                        <mat-autocomplete #autoIdentificacion="matAutocomplete"
+                            (optionSelected)="seleccionarSugerenciaIdentificacion($event.option.value)">
+                            <mat-option *ngFor="let sugerencia of sugerenciasIdentificacion | async"
+                                [value]="sugerencia">
+                                {{ sugerencia.identificacion }}
                             </mat-option>
-                        </mat-autocomplete> -->
+                        </mat-autocomplete>
                         <div class="input-group-append">
                             <button class="input-group-text search-button">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group search-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar por nombre..."
+                            [formControl]="buscarNombre" [matAutocomplete]="autoNombre"
+                            (focus)="buscarNombre.setValue(buscarNombre.value || '')">
+                        <mat-autocomplete #autoNombre="matAutocomplete"
+                            (optionSelected)="seleccionarSugerenciaNombre($event.option.value)">
+                            <mat-option *ngFor="let sugerencia of sugerenciasNombre | async" [value]="sugerencia">
+                                {{ sugerencia.nombre }}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="input-group-append">
+                            <button class="input-group-text search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group search-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar por correo..."
+                            [formControl]="buscarCorreo" [matAutocomplete]="autoCorreo"
+                            (focus)="buscarCorreo.setValue(buscarCorreo.value || '')">
+                        <mat-autocomplete #autoCorreo="matAutocomplete"
+                            (optionSelected)="seleccionarSugerenciaCorreo($event.option.value)">
+                            <mat-option *ngFor="let sugerencia of sugerenciasCorreo | async" [value]="sugerencia">
+                                {{ sugerencia.correo }}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="input-group-append">
+                            <button class="input-group-text search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-create" (click)="buscarClientes()">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
                 </div>
             </div>
 
@@ -68,7 +111,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cliente of listClientes.slice((paginaActual - 1) * registrosPorPagina, paginaActual * registrosPorPagina)">
+                                <tr
+                                    *ngFor="let cliente of listClientes.slice((paginaActual - 1) * registrosPorPagina, paginaActual * registrosPorPagina)">
                                     <td>{{ cliente.identificacion }}</td>
                                     <td>{{ cliente.nombre + ' ' + cliente.apellidos }}</td>
                                     <td>{{ cliente.correo }}</td>
@@ -76,7 +120,12 @@
                                     <td>{{ cliente.telefono }}</td>
                                     <td class="text-center">
                                         <div class="action-buttons">
-                                            <button class="btn btn-delete" title="Eliminar" (click)="eliminarCliente(cliente)">
+                                            <button class="btn btn-promote" title="Convertir a empleado"
+                                                (click)="convertirAEmpleado(cliente)">
+                                                <i class="fas fa-user-tie"></i>
+                                            </button>
+                                            <button class="btn btn-delete" title="Eliminar"
+                                                (click)="eliminarCliente(cliente)">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>

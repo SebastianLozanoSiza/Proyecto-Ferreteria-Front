@@ -14,6 +14,7 @@ import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { CrearClienteComponent } from './clientes/editar-cliente/editar-cliente.component';
 import { CrearDepartamentoComponent } from './departamentos/crear-departamento/crear-departamento.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ConvertirAEmpleadoComponent } from './clientes/convertir-aempleado/convertir-aempleado.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     CrearProductosComponent,
     BienvenidaComponent,
     CrearClienteComponent,
-    CrearDepartamentoComponent
+    CrearDepartamentoComponent,
+    ConvertirAEmpleadoComponent
   ],
   imports: [
     CommonModule,

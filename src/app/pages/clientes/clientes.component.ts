@@ -1,7 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Clientes } from 'src/app/interfaces/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import Swal from 'sweetalert2';
+import { ConvertirAEmpleadoComponent } from './convertir-aempleado/convertir-aempleado.component';
+import { FormControl } from '@angular/forms';
+import { debounceTime, map, Observable, of, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-clientes',
@@ -11,8 +16,12 @@ import Swal from 'sweetalert2';
 export class ClientesComponent implements OnInit {
 
   public clientesService = inject(ClienteService);
+  public empleadosService = inject(EmpleadoService);
+
+  public dialog = inject(MatDialog);
 
   public listClientes: Clientes[] = [];
+  public listaFiltrada: Clientes[] = [];
 
   //PAGINADO
   public registrosPorPagina: number = 5;
@@ -20,12 +29,103 @@ export class ClientesComponent implements OnInit {
 
   public paginas: number[] = [];
   public paginaActual: number = 1;
+
+  public buscarIdentificacion = new FormControl('');
+  public buscarNombre = new FormControl('');
+  public buscarCorreo = new FormControl('');
+
+  public sugerenciasIdentificacion: Observable<Clientes[]> = of([]);
+  public sugerenciasNombre: Observable<Clientes[]> = of([]);
+  public sugerenciasCorreo: Observable<Clientes[]> = of([]);
+
   ngOnInit(): void {
     this.listarClientes();
+
+    this.sugerenciasIdentificacion = this.buscarIdentificacion.valueChanges.pipe(
+      startWith(''),
+      debounceTime(500),
+      switchMap(valor => {
+        if (!valor || valor.trim() === '') {
+          this.listaFiltrada = [...this.listClientes];
+          return of(this.listClientes);
+        }
+        const coincidencias = this.listClientes.filter(cli =>
+          cli.identificacion.includes(valor)
+        );
+        this.listaFiltrada = coincidencias;
+        return of(coincidencias);
+      })
+    );
+
+    this.sugerenciasNombre = this.buscarNombre.valueChanges.pipe(
+      startWith(''),
+      debounceTime(500),
+      switchMap(valor => {
+        if (!valor || valor.trim() === '') {
+          this.listaFiltrada = [...this.listClientes];
+          return of(this.listClientes);
+        }
+        const coincidencias = this.listClientes.filter(cli =>
+          cli.nombre.toLowerCase().includes(valor.toLowerCase())
+        );
+        this.listaFiltrada = coincidencias;
+        return of(coincidencias);
+      })
+    );
+
+
+
+    this.sugerenciasCorreo = this.buscarCorreo.valueChanges.pipe(
+      startWith(''),
+      debounceTime(500),
+      switchMap(valor => {
+        if (!valor || valor.trim() === '') {
+          this.listaFiltrada = [...this.listClientes];
+          return of(this.listClientes);
+        }
+        const coincidencias = this.listClientes.filter(cli =>
+          cli.correo.toLowerCase().includes(valor.toLowerCase())
+        );
+        this.listaFiltrada = coincidencias;
+        return of(coincidencias);
+      })
+    );
+  }
+
+  buscarClientes() {
+    this.clientesService.listarClientes(this.buscarIdentificacion.value || '', this.buscarNombre.value || '', this.buscarCorreo.value || '').subscribe({
+      next: (value) => {
+        if (!value.respuesta.error) {
+          this.listClientes = value.clientes;
+          this.totalRegistros = value.clientes.length;
+          this.calcularPaginas();
+        }
+      },
+      error: (err) => {
+        this.listClientes = [];
+        this.totalRegistros = 0;
+        this.calcularPaginas();
+      }
+    });
+  }
+
+  seleccionarSugerenciaIdentificacion(cliente: Clientes) {
+    this.buscarIdentificacion.setValue(cliente.identificacion, { emitEvent: false });
+    this.listaFiltrada = [cliente];
+  }
+
+  seleccionarSugerenciaNombre(cliente: Clientes) {
+    this.buscarNombre.setValue(cliente.nombre, { emitEvent: false });
+    this.listaFiltrada = [cliente];
+  }
+
+  seleccionarSugerenciaCorreo(cliente: Clientes) {
+    this.buscarCorreo.setValue(cliente.correo, { emitEvent: false });
+    this.listaFiltrada = [cliente];
   }
 
   listarClientes() {
-    this.clientesService.listarClientes().subscribe({
+    this.clientesService.listarClientes("", "", "").subscribe({
       next: (value) => {
         if (!value.respuesta.error) {
           this.listClientes = value.clientes;
@@ -115,6 +215,18 @@ export class ClientesComponent implements OnInit {
         });
       }
     });
+  }
+
+  convertirAEmpleado(cliente: Clientes) {
+    this.dialog.open(ConvertirAEmpleadoComponent, {
+      maxHeight: "80vh",
+      data: cliente,
+      disableClose: true
+    }).afterClosed().subscribe(resultado => {
+      if (resultado === "true") {
+        this.listarClientes();
+      }
+    })
   }
 
 }

@@ -87,6 +87,22 @@
     transform: translateY(0);
 }
 
+.btn-promote {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-right: 5px;
+    transition: all 0.3s;
+}
+
+.btn-promote:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(40, 167, 69, 0.3);
+}
+
 .card {
     border: none;
     border-radius: 15px;
@@ -152,7 +168,8 @@
     gap: 8px;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit,
+.btn-delete {
     width: 36px;
     height: 36px;
     display: flex;
@@ -192,7 +209,7 @@
     margin-bottom: 0;
 }
 
-.page-item{
+.page-item {
     cursor: pointer;
 }
 
