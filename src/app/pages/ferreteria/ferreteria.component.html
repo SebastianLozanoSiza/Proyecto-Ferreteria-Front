@@ -1,10 +1,10 @@
-<section class="productos-section">
+<section class="ferreteria-section">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <h2 class="section-title">
-                        <i class="fas fa-map-marked-alt"></i> Productos
+                        <i class="fas fa-tools"></i> Ferreterias
                     </h2>
                 </div>
             </div>
@@ -17,45 +17,61 @@
             <div class="row mb-4 justify-content-center">
                 <div class="col-md-3 text-center">
                     <div class="input-group search-group mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar por nombre"
-                            [formControl]="buscarNombre" [matAutocomplete]="autoNombre">
-                        <mat-autocomplete #autoNombre="matAutocomplete"
-                            (optionSelected)="seleccionarSugerenciaNombre($event.option.value)">
-                            <mat-option *ngFor="let sugerencia of sugerenciasNombre | async" [value]="sugerencia">
-                                {{ sugerencia.nombreProducto }}
+                        <input type="text" class="form-control" placeholder="Buscar por nit" [formControl]="buscarNit"
+                            [matAutocomplete]="autoNit">
+                        <mat-autocomplete #autoNit="matAutocomplete"
+                            (optionSelected)="seleccionarSugerenciaNit($event.option.value)">
+                            <mat-option *ngFor="let sugerencia of sugerenciasNit | async" [value]="sugerencia">
+                                {{ sugerencia.nit }}
                             </mat-option>
                         </mat-autocomplete>
-                    </div>
-                </div>
-                <div class="col-md-3 text-center">
-                    <div class="input-group search-group mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar por categoría"
-                            [formControl]="buscarCategoria" [matAutocomplete]="autoCategoria">
-                        <mat-autocomplete #autoCategoria="matAutocomplete"
-                            (optionSelected)="seleccionarSugerenciaCategoria($event.option.value)">
-                            <mat-option *ngFor="let sugerencia of sugerenciasCategoria | async" [value]="sugerencia">
-                                {{ sugerencia.categoria }}
-                            </mat-option>
-                        </mat-autocomplete>
+                        <div class="input-group-append">
+                            <button class="input-group-text search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">
                     <div class="input-group search-group mb-3">
                         <input type="text" class="form-control" placeholder="Buscar por ferreteria"
-                            [formControl]="buscarRazonSocial" [matAutocomplete]="autoRazonSocial">
-                        <mat-autocomplete #autoRazonSocial="matAutocomplete"
+                            [formControl]="buscarRazonSocial" [matAutocomplete]="autoFerreteria">
+                        <mat-autocomplete #autoFerreteria="matAutocomplete"
                             (optionSelected)="seleccionarSugerenciaRazonSocial($event.option.value)">
                             <mat-option *ngFor="let sugerencia of sugerenciasRazonSocial | async" [value]="sugerencia">
-                                {{ sugerencia.razonSocialFerreteria }}
+                                {{ sugerencia.razonSocial }}
                             </mat-option>
                         </mat-autocomplete>
+                        <div class="input-group-append">
+                            <button class="input-group-text search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <button class="btn btn-create" (click)="crearProducto()" *ngIf="permisoCrear">
-                        <i class="fas fa-plus-circle me-2"></i>Crear
+                <div class="col-md-3 text-center">
+                    <div class="input-group search-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar por representante"
+                            [formControl]="buscarRepresentante" [matAutocomplete]="autoRepresentante">
+                        <mat-autocomplete #autoRepresentante="matAutocomplete"
+                            (optionSelected)="seleccionarSugerenciaRepresentante($event.option.value)">
+                            <mat-option *ngFor="let sugerencia of sugerenciasRepresentante | async"
+                                [value]="sugerencia">
+                                {{ sugerencia.representante }}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="input-group-append">
+                            <button class="input-group-text search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex justify-content-center">
+                    <button class="btn btn-create me-2" (click)="crearFerreteria()" *ngIf="permisoCrear">
+                        <i class="fas fa-plus"></i> Crear
                     </button>
-                    <button class="btn btn-create" (click)="buscarProductos()">
+                    <button class="btn btn-create" (click)="buscarFerreterias()">
                         <i class="fas fa-search"></i> Buscar
                     </button>
                 </div>
@@ -86,40 +102,35 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 18%;">Producto</th>
-                                    <th scope="col" style="width: 25%;">Descripción</th>
-                                    <th scope="col" style="width: 15%;">Categoría</th>
-                                    <th scope="col" style="width: 10%;">Precio</th>
-                                    <th scope="col" style="width: 10%;">Stock</th>
-                                    <th scope="col" style="width: 15%;">Ferretería</th>
-                                    <th *ngIf="permisoEditar || permisoEliminar" scope="col" class="text-center"
-                                        style="width: 7%;">Acciones</th>
+                                    <th scope="col" style="width: 15%;">Nit</th>
+                                    <th scope="col" style="width: 30%;">Ferreteria</th>
+                                    <th scope="col" style="width: 25%;">Representante</th>
+                                    <th scope="col" style="width: 15%;">Fecha Registro</th>
+                                    <th  *ngIf="permisoEditar || permisoEliminar" scope="col" class="text-center" style="width: 15%;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let producto of listaProductos.slice((paginaActual - 1) * registrosPorPagina, paginaActual * registrosPorPagina)">
-                                    <td>{{ producto.nombreProducto }}</td>
-                                    <td>{{ producto.descripcion }}</td>
-                                    <td>{{ producto.categoria }}</td>
-                                    <td>{{ producto.precio }}</td>
-                                    <td>{{ producto.stock }}</td>
-                                    <td>{{ producto.razonSocialFerreteria }}</td>
-                                    <td *ngIf="permisoEditar || permisoEliminar" class="text-center">
+                                    *ngFor="let ferreteria of listaFerreteria.slice((paginaActual - 1) * registrosPorPagina, paginaActual * registrosPorPagina)">
+                                    <td>{{ ferreteria.nit}}</td>
+                                    <td>{{ ferreteria.razonSocial }}</td>
+                                    <td>{{ ferreteria.representante }}</td>
+                                    <td>{{ ferreteria.fechaRegistro | date: 'yyyy-MM-dd hh:mm a' }}</td>
+                                    <td  *ngIf="permisoEditar || permisoEliminar" class="text-center">
                                         <div class="action-buttons">
                                             <button class="btn btn-edit" title="Editar"
-                                                (click)="editarProducto(producto)" *ngIf="permisoEditar">
+                                                (click)="editarFerreteria(ferreteria)" *ngIf="permisoEditar">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button class="btn btn-delete" title="Eliminar"
-                                                (click)="eliminarProducto(producto)" *ngIf="permisoEliminar">
+                                                (click)="eliminarFerreteria(ferreteria)" *ngIf="permisoEliminar">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr *ngIf="listaProductos.length === 0">
-                                    <td colspan="7" class="text-center">No se encontraron productos</td>
+                                <tr *ngIf="listaFerreteria.length === 0">
+                                    <td colspan="5" class="text-center">No se encontraron departamentos</td>
                                 </tr>
                             </tbody>
                         </table>

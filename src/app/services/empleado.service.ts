@@ -15,8 +15,8 @@ export class EmpleadoService {
 
   constructor() { }
 
-  listarEmpleados(): Observable<ListarEmpleados> {
-    return this.http.get<ListarEmpleados>(`${this.baseUrl}/listarEmpleados`)
+  listarEmpleados(identificacion: string, nombre: string, correo: string, rol: string, ferreteria: string): Observable<ListarEmpleados> {
+    return this.http.get<ListarEmpleados>(`${this.baseUrl}/listarEmpleados?identificacion=${identificacion}&nombre=${nombre}&correo=${correo}&rol=${rol}&ferreteria=${ferreteria}`)
   }
 
   crearEmpleado(empleado: CrearEmpleado): Observable<Respuesta> {

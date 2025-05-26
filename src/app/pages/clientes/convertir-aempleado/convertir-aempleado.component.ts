@@ -51,7 +51,7 @@ export class ConvertirAEmpleadoComponent implements OnInit {
   })
 
   listarFerreterias() {
-    this.ferreteriaService.listarFerreterias().subscribe({
+    this.ferreteriaService.listarFerreterias("", "", "").subscribe({
       next: (value) => {
         if (!value.respuesta.error) {
           this.listaFerreterias = value.ferreteria;

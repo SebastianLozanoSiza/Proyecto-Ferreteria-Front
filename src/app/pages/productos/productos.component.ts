@@ -16,6 +16,7 @@ import { debounceTime, map, Observable, of, startWith, switchMap } from 'rxjs';
 export class ProductosComponent implements OnInit {
 
   public listaProductos: Productos[] = [];
+  public listaFiltrada: Productos[] = [];
 
   public productosService = inject(ProductoService);
   private permisosService = inject(PermisosService);
@@ -42,16 +43,22 @@ export class ProductosComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.verificarPermisos();
     this.listarProductos();
 
     this.sugerenciasNombre = this.buscarNombre.valueChanges.pipe(
       startWith(''),
       debounceTime(500),
       switchMap(valor => {
-        if (!valor || valor.trim() === '') return of([]);
-        return this.productosService.listarProductos(valor, '', '').pipe(
-          map(resp => resp.productos || [])
+        if (!valor || valor.trim() === '') {
+          this.listaFiltrada = [...this.listaProductos];
+          return of(this.listaProductos);
+        }
+        const coincidencias = this.listaProductos.filter(pro =>
+          pro.nombreProducto.includes(valor)
         );
+        this.listaFiltrada = coincidencias;
+        return of(coincidencias);
       })
     );
 
@@ -59,10 +66,15 @@ export class ProductosComponent implements OnInit {
       startWith(''),
       debounceTime(500),
       switchMap(valor => {
-        if (!valor || valor.trim() === '') return of([]);
-        return this.productosService.listarProductos('', valor, '').pipe(
-          map(resp => resp.productos || [])
+        if (!valor || valor.trim() === '') {
+          this.listaFiltrada = [...this.listaProductos];
+          return of(this.listaProductos);
+        }
+        const coincidencias = this.listaProductos.filter(pro =>
+          pro.categoria.includes(valor)
         );
+        this.listaFiltrada = coincidencias;
+        return of(coincidencias);
       })
     );
 
@@ -70,10 +82,15 @@ export class ProductosComponent implements OnInit {
       startWith(''),
       debounceTime(500),
       switchMap(valor => {
-        if (!valor || valor.trim() === '') return of([]);
-        return this.productosService.listarProductos('', '', valor).pipe(
-          map(resp => resp.productos || [])
+        if (!valor || valor.trim() === '') {
+          this.listaFiltrada = [...this.listaProductos];
+          return of(this.listaProductos);
+        }
+        const coincidencias = this.listaProductos.filter(pro =>
+          pro.razonSocialFerreteria.includes(valor)
         );
+        this.listaFiltrada = coincidencias;
+        return of(coincidencias);
       })
     );
   }
@@ -96,18 +113,18 @@ export class ProductosComponent implements OnInit {
   }
 
   seleccionarSugerenciaNombre(producto: Productos) {
-    this.buscarNombre.setValue(producto.nombreProducto);
-    this.buscarProductos();
+    this.buscarNombre.setValue(producto.nombreProducto, { emitEvent: false });
+    this.listaFiltrada = [producto];
   }
 
   seleccionarSugerenciaCategoria(producto: Productos) {
-    this.buscarCategoria.setValue(producto.categoria);
-    this.buscarProductos();
+    this.buscarCategoria.setValue(producto.categoria, { emitEvent: false });
+    this.listaFiltrada = [producto];
   }
 
   seleccionarSugerenciaRazonSocial(producto: Productos) {
-    this.buscarRazonSocial.setValue(producto.razonSocialFerreteria);
-    this.buscarProductos();
+    this.buscarRazonSocial.setValue(producto.razonSocialFerreteria, { emitEvent: false });
+    this.listaFiltrada = [producto];
   }
 
   listarProductos() {

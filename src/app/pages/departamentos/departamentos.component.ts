@@ -40,6 +40,7 @@ export class DepartamentosComponent implements OnInit {
   public sugerencias: Observable<Departamentos[]> = of([]);
 
   ngOnInit(): void {
+    this.verificarPermisos();
     this.listarDepartamentos();
 
     this.sugerencias = this.buscar.valueChanges.pipe(
@@ -195,7 +196,7 @@ seleccionarSugerencia(departamento: Departamentos) {
     this.permisosService.listarModulos().subscribe({
       next: (value) => {
         if (!value.respuesta.error) {
-          const modulo = value.modulos.find(m => m.nombreModulo === 'Productos');
+          const modulo = value.modulos.find(m => m.nombreModulo === 'Departamentos');
           this.permisoCrear = modulo ? modulo.crear : false;
           this.permisoEditar = modulo ? modulo.actualizar : false;
           this.permisoEliminar = modulo ? modulo.eliminar : false;

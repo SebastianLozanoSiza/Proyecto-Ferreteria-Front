@@ -107,7 +107,8 @@
                                     <th scope="col" style="width: 20%;">Correo</th>
                                     <th scope="col" style="width: 20%;">Dirección</th>
                                     <th scope="col" style="width: 12%;">Teléfono</th>
-                                    <th scope="col" class="text-center" style="width: 8%;">Acciones</th>
+                                    <th *ngIf="permisoEditar || permisoEliminar" scope="col" class="text-center"
+                                        style="width: 8%;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,13 +119,13 @@
                                     <td>{{ cliente.correo }}</td>
                                     <td>{{ cliente.direccion }}</td>
                                     <td>{{ cliente.telefono }}</td>
-                                    <td class="text-center">
+                                    <td *ngIf="permisoEditar || permisoEliminar" class="text-center">
                                         <div class="action-buttons">
                                             <button class="btn btn-promote" title="Convertir a empleado"
-                                                (click)="convertirAEmpleado(cliente)">
+                                                *ngIf="permisoEditar" (click)="convertirAEmpleado(cliente)">
                                                 <i class="fas fa-user-tie"></i>
                                             </button>
-                                            <button class="btn btn-delete" title="Eliminar"
+                                            <button class="btn btn-delete" title="Eliminar" *ngIf="permisoEliminar"
                                                 (click)="eliminarCliente(cliente)">
                                                 <i class="fas fa-trash"></i>
                                             </button>

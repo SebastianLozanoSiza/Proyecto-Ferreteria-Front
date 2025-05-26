@@ -18,7 +18,8 @@
                 <div class="col-md-3 text-center">
                     <div class="input-group search-group mb-3">
                         <input type="text" class="form-control" placeholder="Buscar departamento..."
-                            [formControl]="buscar" [matAutocomplete]="auto" (focus)="buscar.setValue(buscar.value || '')">
+                            [formControl]="buscar" [matAutocomplete]="auto"
+                            (focus)="buscar.setValue(buscar.value || '')">
                         <mat-autocomplete #auto="matAutocomplete"
                             (optionSelected)="seleccionarSugerencia($event.option.value)">
                             <mat-option *ngFor="let sugerencia of sugerencias | async" [value]="sugerencia">
@@ -33,7 +34,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 text-end">
-                    <button class="btn btn-create" (click)="crearDepartamento()" *ngIf="!permisoCrear">
+                    <button class="btn btn-create" (click)="crearDepartamento()" *ngIf="permisoCrear">
                         <i class="fas fa-plus-circle me-2"></i>Crear
                     </button>
                 </div>
@@ -65,7 +66,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="w-75">Departamento</th>
-                                    <th scope="col" class="text-center w-25" *ngIf="!permisoEditar || !permisoEliminar">
+                                    <th scope="col" class="text-center w-25" *ngIf="permisoEditar || permisoEliminar">
                                         Acciones</th>
                                 </tr>
                             </thead>
@@ -73,13 +74,13 @@
                                 <tr
                                     *ngFor="let departamento of listaFiltrada.slice((paginaActual - 1) * registrosPorPagina, paginaActual * registrosPorPagina)">
                                     <td>{{ departamento.nombre }}</td>
-                                    <td class="text-center">
+                                    <td *ngIf="permisoEditar || permisoEliminar" class="text-center">
                                         <div class="action-buttons">
-                                            <button *ngIf="!permisoEditar" class="btn btn-edit" title="Editar"
+                                            <button *ngIf="permisoEditar" class="btn btn-edit" title="Editar"
                                                 (click)="editarDepartamento(departamento)">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <button *ngIf="!permisoEliminar" class="btn btn-delete" title="Eliminar"
+                                            <button *ngIf="permisoEliminar" class="btn btn-delete" title="Eliminar"
                                                 (click)="eliminarDepartamento(departamento)">
                                                 <i class="fas fa-trash"></i>
                                             </button>

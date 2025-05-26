@@ -12,3 +12,9 @@ export interface Ferreteria{
     representante: string,
     fechaRegistro: string
 }
+
+export interface CrearFerreteria{
+    nit: string,
+    razonSocial: string,
+    representante: string
+}

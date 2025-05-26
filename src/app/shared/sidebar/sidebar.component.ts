@@ -29,7 +29,8 @@ export class SidebarComponent implements OnInit {
     'Clientes': 'fas fa-users',
     'Empleados': 'fas fa-user-tie',
     'Departamentos': 'fas fa-map-marked-alt',
-    'Productos': 'fas fa-box-open'
+    'Productos': 'fas fa-box-open',
+    'Ferreterias': 'fas fa-tools',
   };
 
   ngOnInit(): void {
@@ -37,7 +38,7 @@ export class SidebarComponent implements OnInit {
       next: (resp) => {
         if (!resp.respuesta.error) {
           this.menuItems = resp.modulos
-            .filter(m => m.leer)
+            .filter(m => m.leer && this.modulosIconos[m.nombreModulo])
             .map(m => ({
               titulo: m.nombreModulo,
               icono: this.modulosIconos[m.nombreModulo] || 'fas fa-folder',

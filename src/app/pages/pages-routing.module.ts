@@ -7,6 +7,7 @@ import { EmpleadosComponent } from './empleados/empleados.component';
 import { DepartamentosComponent } from './departamentos/departamentos.component';
 import { authGuard } from '../custom/auth.guard';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { FerreteriaComponent } from './ferreteria/ferreteria.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
       { path: 'productos', component: ProductosComponent, data: { titulo: 'Productos' } },
       { path: 'clientes', component: ClientesComponent, data: { titulo: 'Clientes' } },
       { path: 'empleados', component: EmpleadosComponent, data: { titulo: 'Empleados' } },
-      { path: 'departamentos', component: DepartamentosComponent, data: { titulo: 'Departamentos' } }
+      { path: 'departamentos', component: DepartamentosComponent, data: { titulo: 'Departamentos' } },
+      { path: 'ferreterias', component: FerreteriaComponent, data: { titulo: 'Ferreterias' } },
     ]
   }
 ];

@@ -15,6 +15,9 @@ import { CrearClienteComponent } from './clientes/editar-cliente/editar-cliente.
 import { CrearDepartamentoComponent } from './departamentos/crear-departamento/crear-departamento.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ConvertirAEmpleadoComponent } from './clientes/convertir-aempleado/convertir-aempleado.component';
+import { FerreteriaComponent } from './ferreteria/ferreteria.component';
+import { CrearFerreteriaComponent } from './ferreteria/crear-ferreteria/crear-ferreteria.component';
+import { CrearEmpleadoComponent } from './empleados/crear-empleado/crear-empleado.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { ConvertirAEmpleadoComponent } from './clientes/convertir-aempleado/conv
     BienvenidaComponent,
     CrearClienteComponent,
     CrearDepartamentoComponent,
-    ConvertirAEmpleadoComponent
+    ConvertirAEmpleadoComponent,
+    FerreteriaComponent,
+    CrearFerreteriaComponent,
+    CrearEmpleadoComponent
   ],
   imports: [
     CommonModule,

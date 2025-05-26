@@ -6,7 +6,8 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 import Swal from 'sweetalert2';
 import { ConvertirAEmpleadoComponent } from './convertir-aempleado/convertir-aempleado.component';
 import { FormControl } from '@angular/forms';
-import { debounceTime, map, Observable, of, startWith, switchMap } from 'rxjs';
+import { debounceTime, Observable, of, startWith, switchMap } from 'rxjs';
+import { PermisosService } from 'src/app/services/permisos.service';
 
 @Component({
   selector: 'app-clientes',
@@ -18,7 +19,12 @@ export class ClientesComponent implements OnInit {
   public clientesService = inject(ClienteService);
   public empleadosService = inject(EmpleadoService);
 
+  private permisosService = inject(PermisosService);
   public dialog = inject(MatDialog);
+
+  public permisoCrear: boolean = false;
+  public permisoEditar: boolean = false;
+  public permisoEliminar: boolean = false;
 
   public listClientes: Clientes[] = [];
   public listaFiltrada: Clientes[] = [];
@@ -39,6 +45,7 @@ export class ClientesComponent implements OnInit {
   public sugerenciasCorreo: Observable<Clientes[]> = of([]);
 
   ngOnInit(): void {
+    this.verificarPermisos();
     this.listarClientes();
 
     this.sugerenciasIdentificacion = this.buscarIdentificacion.valueChanges.pipe(
@@ -227,6 +234,19 @@ export class ClientesComponent implements OnInit {
         this.listarClientes();
       }
     })
+  }
+
+  verificarPermisos() {
+    this.permisosService.listarModulos().subscribe({
+      next: (value) => {
+        if (!value.respuesta.error) {
+          const modulo = value.modulos.find(m => m.nombreModulo === 'Ferreterias');
+          this.permisoCrear = modulo ? modulo.crear : false;
+          this.permisoEditar = modulo ? modulo.actualizar : false;
+          this.permisoEliminar = modulo ? modulo.eliminar : false;
+        }
+      },
+    });
   }
 
 }
