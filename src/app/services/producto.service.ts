@@ -25,7 +25,7 @@ export class ProductoService {
   }
 
   actualizarProducto(id: number, producto: CrearProducto): Observable<Respuesta> {
-    return this.http.put<Respuesta>(`${this.baseUrl}/${id}`, producto)
+    return this.http.put<Respuesta>(`${this.baseUrl}/actualizarProducto?id=${id}`, producto)
   }
 
   eliminarProducto(id: number): Observable<Respuesta> {
